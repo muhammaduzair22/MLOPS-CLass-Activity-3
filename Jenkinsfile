@@ -2,46 +2,47 @@ pipeline {
     agent any
 
     stages {
-        stage('Clone Repository') {
+        stage('Clone repository') {
             steps {
-                script {
-                    checkout scm
-                }
+                // Clone the repository
+                checkout scm
             }
         }
 
-        stage('Install Dependencies') {
+        stage('Install dependencies') {
             steps {
-                script {
-                    // Using a virtual environment for isolation
-                    sh 'python -m venv venv'
-                    sh 'source venv/bin/activate && pip install -r requirements.txt'
-                }
+                // Install the required dependencies
+                sh 'pip install --upgrade pip'
+                sh 'pip install -r requirements.txt'
             }
         }
 
-        stage('Execute test.py') {
+        stage('Run tests') {
             steps {
-                script {
-                    sh 'python test.py'
-                }
+                // Execute the tests
+                sh 'pytest test.py'
             }
         }
 
         stage('Deploy') {
             steps {
                 script {
-                    def branchName = sh(script: 'git rev-parse --abbrev-ref HEAD', returnStdout: true).trim()
-
-                    if (branchName == 'main') {
-                        echo 'Deploying to production'
-                        // Add your production deployment commands here
-                    } else {
-                        echo 'Deploying to UAT'
-                        // Add your UAT deployment commands here
-                    }
+                    deploy(env.BRANCH_NAME)
                 }
             }
         }
+    }
+}
+
+def deploy(String branchName) {
+    if (branchName == 'main') {
+        echo "Deploying to production"
+       // deploy
+    } else if (branchName == 'dev') {
+        echo "Deploying to UAT"
+      //deploy
+    } else {
+        echo "Deploying to a non-production/non-UAT branch: ${branchName}"
+       //deploy
     }
 }
