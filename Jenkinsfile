@@ -15,7 +15,7 @@ pipeline {
             steps {
                 script {
                     // Install dependencies (replace with your actual commands)
-                    sh 'npm install'
+                    sh 'pip3 install -r requirements.txt'
                 }
             }
         }
@@ -24,7 +24,7 @@ pipeline {
             steps {
                 script {
                     // Execute test.py (replace with your actual commands)
-                    sh 'python test.py'
+                    sh 'pytest test.py'
                 }
             }
         }
