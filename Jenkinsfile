@@ -5,7 +5,6 @@ pipeline {
         stage('Clone Repository') {
             steps {
                 script {
-                    // Clone the repository
                     checkout scm
                 }
             }
@@ -14,8 +13,9 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 script {
-                    // Install dependencies (replace with your actual commands)
-                    sh 'pip3 install pytest'
+                    // Using a virtual environment for isolation
+                    sh 'python -m venv venv'
+                    sh 'source venv/bin/activate && pip install -r requirements.txt'
                 }
             }
         }
@@ -23,8 +23,7 @@ pipeline {
         stage('Execute test.py') {
             steps {
                 script {
-                    // Execute test.py (replace with your actual commands)
-                    sh 'pytest test.py'
+                    sh 'python test.py'
                 }
             }
         }
@@ -32,10 +31,8 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    // Get the current branch name
                     def branchName = sh(script: 'git rev-parse --abbrev-ref HEAD', returnStdout: true).trim()
 
-                    // Deploy based on branch name
                     if (branchName == 'main') {
                         echo 'Deploying to production'
                         // Add your production deployment commands here
