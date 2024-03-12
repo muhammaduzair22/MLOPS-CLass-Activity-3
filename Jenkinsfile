@@ -15,7 +15,7 @@ pipeline {
             steps {
                 script {
                     // Install dependencies (replace with your actual commands)
-                    sh 'pip3 install -r requirements.txt'
+                    sh 'pip3 install pytest'
                 }
             }
         }
