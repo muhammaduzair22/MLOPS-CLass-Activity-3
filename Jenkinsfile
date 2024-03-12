@@ -12,15 +12,15 @@ pipeline {
         stage('Install dependencies') {
             steps {
                 // Install the required dependencies
-                sh 'pip install --upgrade pip'
-                sh 'pip install -r requirements.txt'
+                bat 'pip install --upgrade pip'
+                bat 'pip install -r requirements.txt'
             }
         }
 
         stage('Run tests') {
             steps {
                 // Execute the tests
-                sh 'pytest test.py'
+                bat 'pytest test.py'
             }
         }
 
