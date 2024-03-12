@@ -14,8 +14,8 @@ class mlops:
 	def getClassName(self):
 		return "Machine Learning Operations (CS-B)"
 	
-mlops_class = mlops(5)
-print("Number of students in the class : ", mlops_class.getTotalStudents())
+# mlops_class = mlops(5)
+# print("Number of students in the class : ", mlops_class.getTotalStudents())
 
 # mlops_class.addStudent()
 # print("Number of students in the class : ", mlops_class.getTotalStudents())
