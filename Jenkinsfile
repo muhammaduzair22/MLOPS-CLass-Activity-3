@@ -38,11 +38,11 @@ def deploy(String branchName) {
     if (branchName == 'main') {
         echo "Deploying to production"
        // deploy
-    } else if (branchName == 'dev') {
+    } else {
         echo "Deploying to UAT"
       //deploy
-    } else {
-        echo "Deploying to a non-production/non-UAT branch: ${branchName}"
-       //deploy
-    }
+    // } else {
+    //     echo "Deploying to a non-production/non-UAT branch: ${branchName}"
+    //    //deploy
+    // }
 }
